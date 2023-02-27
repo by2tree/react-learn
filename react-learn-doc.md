@@ -37,11 +37,73 @@
 </html>
 ```
 
-## 1.3 React 虚拟DOM
+## 1.3 React 脚手架
+
+​	Web前端应用几乎都拥有非常复杂的项目架构。React项目开发也是如此，比较流行的做法是采用Webpack+ES6的模式来搭建项目架构，然后通过打包方式发布Web应用。
+
+​	 涉及React项目开发的技术点有很多，比如：Nodejs，npm包管理工具、webpack模块打包器、ES6（[ECMAScript6](https://es6.ruanyifeng.com/)），以及Bable [ˈbeɪbl] 编译器等。<img src="https://es6.ruanyifeng.com/images/cover-3rd.jpg" alt="img" style="zoom:25%;" />
+
+```html
+ECMA  欧洲计算机制造商协会(European Computer Manufacturers Association)
+```
+
+​	React脚手架产品有很多，不过最著名的还是Fecebook自己推出的 **creat-react-app**脚手架。1.4 React 虚拟DOM
+
+​	Node.js 是 JavaScript 的服务器运行环境（runtime）。它对 ES6 的支持度更高。除了那些默认打开的功能，还有一些语法功能已经实现了，但是默认没有打开。使用下面的命令，可以查看 Node.js 默认没有打开的 ES6 实验性语法。
+
+```shell
+// Linux & Mac
+$ node --v8-options | grep harmony
+
+// Windows
+$ node --v8-options | findstr harmony
+```
+
+ **Bable转码器**
+
+​	[Babel](https://babeljs.io/) 是一个广泛使用的 ES6 转码器，可以将 ES6 代码转为 ES5 代码，从而在老版本的浏览器执行。这意味着，你可以用 ES6 的方式编写程序，又不用担心现有环境是否支持。下面是一个例子。
+
+>  npm install --save-dev @babel/core
+
+```javascript
+// 转码前
+input.map(item => item + 1);
+
+// 转码后
+input.map(function (item) {
+  return item + 1;
+});
+```
+
+**实例：create-react-app脚手架创建应用**
+
+- 安装create-react-app脚手架
+
+```shell
+npm install -g create-react-app                    // 全局安装
+
+npm install  create-react-app   
+```
+
+- 创建应用
+
+```shell
+npx create-react-app learn_1.3
+```
+
+- 启动应用
+
+```shell
+ npm start
+ 
+ http://localhost:3000/      //浏览器访问
+```
+
+## 1.4 React 虚拟DOM
 
 
 
-## 1.4 React 渲染机制
+## 1.5 React 渲染机制
 
 
 
