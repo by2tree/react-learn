@@ -163,7 +163,13 @@ const HelloWorld = {
 
 ## 2.1 JSX 介绍
 
+​	JSX其实就是Javascript XML的缩写，JSX作为一种Javascript语法扩展，支持自定义属性，并具有很强的扩展性。JSX是React框架内置的语法。
+
+​	React项目中使用 JSX语法，则必须引用“bable.js”来解析JSX。“ script type="text/babel" ”
+
 ## 2.2 JSX 独立文件
+
+
 
 ## 2.3 JSX 表达式
 
