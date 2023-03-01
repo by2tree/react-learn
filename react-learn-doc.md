@@ -169,7 +169,33 @@ const HelloWorld = {
 
 ## 2.2 JSX 独立文件
 
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
 
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+    const reactSpan = (
+         <span>
+            <h3>react JSX</h3>
+            <p>creat react dom by react jsx.</p>
+         </span>
+    )
+    ReactDOM.render(
+        reactSpan,
+        document.getElementById("root")
+    )
+</script>
+
+</html>
+```
 
 ## 2.3 JSX 表达式
 
