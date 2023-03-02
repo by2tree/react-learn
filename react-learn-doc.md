@@ -199,23 +199,313 @@ const HelloWorld = {
 
 ## 2.3 JSX 表达式
 
+​	React JSX 使用的就是 JavaScript 语法，那么自然可以使用JavaScript表达式。在React JSX 使用JavaScript表达式使用 大括号 **{}** 括起来。
+
+​	React JSX 中的 JavaScript 表达式有很多种：**条件表达式**、**嵌入表达式**、**对象表达式**、**函数表达式**、**增强函数表达式**、**数组表达式**、**样式表达式**、**注释表达式**。
+
 ### 2.3.1 JSX 算术表达式
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script  type="text/babel">
+  const room = document.getElementById("root")
+    const reactSpan = (
+         <span>
+            <h3>react JSX Expression </h3>
+            <p>8+8 = { 8 + 8 }</p>
+         </span>
+    )
+    ReactDOM.render(
+        reactSpan,
+        room
+    )
+</script>
+
+</html>
+```
 
 ### 2.3.2 JSX 条件表达式
 
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script  type="text/babel">
+  const room = document.getElementById("root")
+    const reactSpan = (
+         <span>
+            <h3>react JSX Expression </h3>
+            <p> test exp “ 1 = 1 ” { 1 == 1 ?  "true" : "false" }</p>
+            <p> test exp “ 1 != 1 ” { 1 != 1 ? "true" : "false" }</p>
+         </span>
+    )
+    ReactDOM.render(
+        reactSpan,
+        room
+    )
+</script>
+
+</html>
+```
+
 ### 2.3.3 JSX 嵌入表达式
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script  type="text/babel">
+  const room = document.getElementById("root")
+  const name = "Tom"
+    const reactSpan = (
+         <span>
+            <h3>react JSX Expression </h3>
+            <p>{name}</p>
+         </span>
+    )
+    ReactDOM.render(
+        reactSpan,
+        room
+    )
+</script>
+
+</html>
+```
 
 ### 2.3.4 JSX 对象表达式
 
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script  type="text/babel">
+  const room = document.getElementById("root")
+  const userInfo = {
+      name:"Tom",
+      sex: "男",
+      age:20
+  }
+    const reactSpan = (
+         <span>
+            <h3>react JSX Expression </h3>
+            <p>用户信息 {'>>'} 名字：{userInfo.name}，性别：{userInfo.sex}，年龄：{userInfo.age}</p>
+         </span>
+    )
+    ReactDOM.render(
+        reactSpan,
+        room
+    )
+</script>
+
+</html>
+```
+
 ### 2.3.5 JSX 函数表达式
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script  type="text/babel">
+  const room = document.getElementById("root")
+  const userInfo = {
+      name:"Tom",
+      sex: "男",
+      age:20
+  }
+
+  function formatUserInfo(userInfo) {
+    return "名字：" + userInfo.name +"，性别："+userInfo.sex +"，年龄："+userInfo.age
+  }
+  
+  const reactSpan = (
+         <span>
+            <h3>react JSX Expression </h3>
+            <p>用户信息 {'>>'} {formatUserInfo(userInfo)}</p>
+         </span>
+   )
+    ReactDOM.render(
+        reactSpan,
+        room
+    )
+</script>
+
+</html>
+```
 
 ### 2.3.6 JSX 增强函数表达式
 
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script  type="text/babel">
+  const room = document.getElementById("root")
+  const userInfo = {
+      name:"Tom",
+      sex: "男",
+      age:20
+  }
+
+  function formatUserInfo(userInfo) {
+      if(userInfo) {
+         return "名字：" + userInfo.name +"，性别："+userInfo.sex +"，年龄："+userInfo.age
+      } else {
+         return "userInfo is nothing."
+      }
+  }
+  
+  const reactSpan = (
+         <span>
+            <h3>react JSX Expression </h3>
+            <p>用户信息 {'>>'} {formatUserInfo(userInfo)}</p>
+            <p>用户信息 {'>>'} {formatUserInfo()}</p>
+         </span>
+   )
+    ReactDOM.render(
+        reactSpan,
+        room
+    )
+</script>
+
+</html>
+```
+
 ### 2.3.7 JSX 数组表达式
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script  type="text/babel">
+  const room = document.getElementById("root")
+  
+  const arrayUserInfo = [
+    <span>name:tom,</span>,
+    <span>男,</span>,
+    <span>20</span>
+  ]
+  
+  const reactSpan = (
+         <span>
+            <h3>react JSX Expression </h3>
+            <p>{arrayUserInfo}</p>
+         </span>
+   )
+    ReactDOM.render(
+        reactSpan,
+        room
+    )
+</script>
+
+</html>
+```
 
 ### 2.3.8 JSX 样式达式
 
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script  type="text/babel">
+  const room = document.getElementById("root")
+
+  const css_p_lg = {
+    fontSize:20,
+    color:"red"
+  }
+
+  const reactSpan = (
+         <span>
+            <h3>react JSX Expression </h3>
+            <p style={css_p_lg}> react JSX Style Expression</p>
+         </span>
+   )
+    ReactDOM.render(
+        reactSpan,
+        room
+    )
+</script>
+
+</html>
+```
+
 ### 2.3.9 JSX 注释达式
+
+
 
 
 
