@@ -10,26 +10,23 @@
 </body>
 
 
-<script  type="text/babel">
-  const room = document.getElementById("root")
+<script type="text/babel">
+   const root =  document.getElementById("root")
+   function HelloReactComponent(){
+      return <p> hello ,react component. </p>
+   }
 
-  const css_p_lg = {
-    fontSize:20,
-    color:"red"
-  }
-
-
-  const reactSpan = (
+   const elHello = <HelloReactComponent/>
+  // React JSX
+    const reactSpan = (
          <span>
-            <h3>react JSX Expression </h3>
-            <p style={css_p_lg}> react JSX Style Expression</p>
-            {/* 注释 （界面不显示） */}
-            /* 注释 （界面显示） */
+            <h3>React 函数组件</h3>
+           {elHello}
          </span>
-   )
+    )
     ReactDOM.render(
-        reactSpan,
-        room
+      reactSpan,
+      root
     )
 </script>
 

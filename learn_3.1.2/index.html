@@ -1,0 +1,35 @@
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+   // class Component （ 首字母必须是大写！）
+   class HelloReactComponent extends React.Component {
+      render(){
+         return <p> hello ,react component. </p>
+      }
+   }
+   const elHello = <HelloReactComponent/>
+    // React JSX
+    const reactSpan = (
+         <span>
+            <h3>React 类组件</h3>
+           {elHello}
+         </span>
+    )
+    ReactDOM.render(
+      reactSpan,
+      root
+    )
+</script>
+
+</html>

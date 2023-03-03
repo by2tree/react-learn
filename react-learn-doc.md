@@ -248,7 +248,6 @@ const HelloWorld = {
    <div id="root"></div>
 </body>
 
-
 <script  type="text/babel">
   const room = document.getElementById("root")
     const reactSpan = (
@@ -281,7 +280,6 @@ const HelloWorld = {
    <div id="root"></div>
 </body>
 
-
 <script  type="text/babel">
   const room = document.getElementById("root")
   const name = "Tom"
@@ -313,7 +311,6 @@ const HelloWorld = {
 <body>
    <div id="root"></div>
 </body>
-
 
 <script  type="text/babel">
   const room = document.getElementById("root")
@@ -350,7 +347,6 @@ const HelloWorld = {
 <body>
    <div id="root"></div>
 </body>
-
 
 <script  type="text/babel">
   const room = document.getElementById("root")
@@ -440,7 +436,6 @@ const HelloWorld = {
    <div id="root"></div>
 </body>
 
-
 <script  type="text/babel">
   const room = document.getElementById("root")
   
@@ -479,7 +474,6 @@ const HelloWorld = {
    <div id="root"></div>
 </body>
 
-
 <script  type="text/babel">
   const room = document.getElementById("root")
 
@@ -505,11 +499,220 @@ const HelloWorld = {
 
 ### 2.3.9 JSX 注释达式
 
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
 
+<body>
+   <div id="root"></div>
+</body>
 
+<script  type="text/babel">
+  const room = document.getElementById("root")
 
+  const css_p_lg = {
+    fontSize:20,
+    color:"red"
+  }
+  const reactSpan = (
+         <span>
+            <h3>react JSX Expression </h3>
+            <p style={css_p_lg}> react JSX Style Expression</p>
+            {/* 注释 （界面不显示） */}
+            /* 注释 （界面显示） */
+         </span>
+   )
+    ReactDOM.render(
+        reactSpan,
+        room
+    )
+</script>
+
+</html>
+```
 
 # 第3章 React 组件与Props
+
+## 3.1 React 组件
+
+​	React组件可以将UI切分成独立的，可复用的部件。React 组价从形式上看很像是JavaScript函数，通过这个函数返回一个需要页面上展示的React元素。
+
+​	React语法是基于版本ECMScript 6 实现的，因此，React组件除了通过JavaScript·函数的形式，还可以通过ES6 Class(类)的形式来实现。
+
+> **React组件的名称首字母必须是大写** 。
+>
+> 首字母不大写报错：unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.
+>
+> 这个规定主要是为了与原生的html标签名称相区别。
+
+​	**函数：**
+
+```javascript
+function reactComponent() {
+    return <p> hello ,react component.</p>
+}
+```
+
+​    **类：**
+
+```javascript
+class reactComponent extends React.Component {
+    render() {
+        return <p> hello ,react component. </p>
+    }
+}
+```
+
+### 3.1.1 React 函数组件
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+   // 函数首字母必须是大写！
+   function HelloReactComponent(){
+      return <p> hello ,react component. </p>
+   }
+
+   const elHello = <HelloReactComponent/>
+   // React JSX
+   const reactSpan = (
+         <span>
+            <h3>React 函数组件</h3>
+           {elHello}
+         </span>
+    )
+    ReactDOM.render(
+      reactSpan,
+      root
+    )
+</script>
+
+</html>
+```
+
+### 3.1.2 React 类组价
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+   // class Component （ 首字母必须是大写！）
+   class HelloReactComponent extends React.Component {
+      render(){
+         return <p> hello ,react component. </p>
+      }
+   }
+   const elHello = <HelloReactComponent/>
+    // React JSX
+    const reactSpan = (
+         <span>
+            <h3>React 类组件</h3>
+           {elHello}
+         </span>
+    )
+    ReactDOM.render(
+      reactSpan,
+      root
+    )
+</script>
+
+</html>
+```
+
+### 3.1.3 React 组合组件
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   function FormTitle(){
+      return <h4> User Login </h4>
+   }
+
+   function UserName() {
+      const userName = (
+         <p>username：<input type="text"/></p>
+      )
+      return userName
+   }
+
+   function Password(){
+      const passwd = (
+         <p>password：<input type="password"/></p>
+      )
+      return passwd
+   }
+
+   function Submit(){
+      const submit = (
+         <p><button> login </button></p>
+      )
+      return submit
+   }
+
+   function FormLogin() {
+      return (
+         <>
+            <FormTitle/>
+            <UserName/>
+            <Password/>
+            <Submit/>
+         </>
+      )
+   }
+ 
+   const reactSpan = (
+      <span>
+         <h3>React 组合组件</h3>
+        {<FormLogin/>}
+      </span>
+   )
+    ReactDOM.render(
+      reactSpan,
+      root
+    )
+</script>
+
+</html>
+```
 
 
 
