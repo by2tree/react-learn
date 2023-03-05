@@ -974,3 +974,51 @@ cdn： https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js
 </html>
 ```
 
+# 第4章 React State与生命周期
+
+## 4.1 React State 介绍
+
+​	React 将组件看成是一个状态机（state machines /məˈʃiːnz/）,通过其内部定义状态（state）与生命周期（Lifecycle  /ˈlaɪf saɪkl/）实现并与用户交互，维持组件不同的状态。所谓Reac组件的 状态机，就是指组件通过用户交互，实现不同的状态，然后通过渲染UI保证用户界面和数据一致性。
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   class Clock extends  React.Component {
+      constructor(props){
+         super(props)
+         this.state = {
+            date: new Date()
+         }
+      }
+
+      render() {
+         return(
+            <div>
+               <h1>Hello, world!</h1>
+               <h2>现在是 {this.state.date.toLocaleTimeString()}.</h2>
+            </div>
+         )
+      }
+   }
+
+    ReactDOM.render(
+      <Clock />,
+      root
+    )
+</script>
+
+</html>
+```
+
