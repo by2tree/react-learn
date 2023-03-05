@@ -1,0 +1,62 @@
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js"   ></script>
+ </head>
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+ 
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   class FromLogin extends React.Component {
+      //static的作用是使它成为Person这个类的属性
+      //定义props的类型、是否必须
+      static propTypes = {
+         username : PropTypes.string.isRequired,
+         passwd : PropTypes.number,
+      }
+      //定义props的默认值
+      static defaultProps={
+         username : "张三"
+      }
+
+      render(){
+         // 解构
+         const {username,passwd} = this.props
+         return (
+            <>
+             <h4> User Login </h4>
+             <p>username：<input type="text" value={username} readOnly /></p>
+             <p>password：<input type="password" value={passwd} readOnly/></p>
+             <p><button> login </button></p>
+            </>
+         )
+      }
+   }
+
+   const loginForm = { username: 'Dai', passwd: 123456 };
+
+   const reactSpan = (
+      <span>
+         <h3>React Props 类式默认值</h3>
+        {<FromLogin/>}
+        //...loginForm批量传递标签属性
+        {<FromLogin {...loginForm}/>}
+      </span>
+   )
+
+   ReactDOM.render(
+      reactSpan,
+      root
+   )
+</script>
+
+</html>

@@ -714,11 +714,263 @@ class reactComponent extends React.Component {
 </html>
 ```
 
+## 3.2 React Props
+
+​	React函数组件可以通过JavaScript函数方式实现，那么React函数组件就可接受参数的传入。React框架定义了Props  /prɒps/概念。
+
+### 3.2.1 React Props应用
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   function FormTitle(){
+      return <h4> User Login </h4>
+   }
+
+   function UserName(props) {
+      const userName = (
+         <p>username：<input type="text" value={props.username} readOnly/></p>
+      )
+      return userName
+   }
+
+   function Password(props){
+      const passwd = (
+         <p>password：<input type="password" value={props.passwd} readOnly/></p>
+      )
+      return passwd
+   }
+
+   function Submit(){
+      const submit = (
+         <p><button> login </button></p>
+      )
+      return submit
+   }
+
+   function FormLogin() {
+      return (
+         <>
+            <FormTitle/>
+            <UserName username="张三"/>
+            <Password passwd="123456"/>
+            <Submit/>
+         </>
+      )
+   }
+ 
+   const reactSpan = (
+      <span>
+         <h3>React Props应用</h3>
+        {<FormLogin/>}
+      </span>
+   )
+    ReactDOM.render(
+      reactSpan,
+      root
+    )
+</script>
+
+</html>
+```
+
+> input标签中 增加定时了只读属性 readOnly
+
+### 3.2.2 React Props只读
+
+​	React Props 在使用上是有限制的。React框架规定 Props 是不能被修改的，也就是说Props是个只读参数。如#3.2.1 在 input标签中 增加定时了只读属性 readOnly  ，如果去掉 input 标签中的 readOnly；可以看到Console控制台错误提示，而页面中input 数据也无法编辑。
+
+> Warning: Failed prop type: You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`.
+
+### 3.2.3 React Props默认值
+
+#### 3.2.3.1 规则校验
+
+```shell
+ # 安装 prop-types 包
+ npm install prop-types
+ # 导入 propTypes 对象
+ import propTypes from 'prop-types';
+ # 使用，组件名.propTypes = {} 设置组件 传参规则
+ Comp.propTypes = {
+    param: propTypes.array  // Comp组件 的 param 参数必须是 数组类型
+}
+```
+
+```apl
+cdn： https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js
+```
+
+**四种常见结构**
+
+- 常用类型：`array`、`number`、`bool`、`string`、`func`、`object`、`symbol`
+
+- React元素类型：`element`
+
+- 必填项：`isRequired`
+
+- 特定的结构对象：`shape({})`
+
+  https://blog.csdn.net/weixin_46318413/article/details/122477594
+
+  https://www.jb51.net/article/242956.htm#_label0
+
+#### 3.2.3.2 函数式默认值
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
 
 
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   function FormTitle(){
+      return <h4> User Login </h4>
+   }
+
+   function UserName(props) {
+      const userName = (
+         <p>username：<input type="text" value={props.username} readOnly /></p>
+      )
+      return userName
+   }
+
+   UserName.propTypes = {
+      username : PropTypes.string.isRequired, //name必需，且为字符串
+   }
+   // username 不存在情况下，使用该默认值：李四
+   UserName.defaultProps = {
+      username : "李四"
+   }
+   function Password(props){
+      const passwd = (
+         <p>password：<input type="password" value={props.passwd} readOnly/></p>
+      )
+      return passwd
+   }
+
+   Password.propTypes = {
+      passwd : PropTypes.number.isRequired, //number必需，且为数字
+   }
+
+   function Submit(){
+      const submit = (
+         <p><button> login </button></p>
+      )
+      return submit
+   }
 
 
+   function FormLogin() {
+      return (
+         <>
+            <FormTitle/>
+            <UserName username="张三"/>
+            <Password passwd={123456}/>
+            <Submit/>
+         </>
+      )
+   }
+ 
+   const reactSpan = (
+      <span>
+         <h3>React Props应用</h3>
+        {<FormLogin/>}
+      </span>
+   )
+    ReactDOM.render(
+      reactSpan,
+      root
+    )
+</script>
 
+</html>
+```
 
+#### 3.2.3.3 类式默认值
 
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js"   ></script>
+ </head>
+ 
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   class FromLogin extends React.Component {
+      //static的作用是使它成为Person这个类的属性
+      //定义props的类型、是否必须
+      static propTypes = {
+         username : PropTypes.string.isRequired,
+         passwd : PropTypes.number,
+      }
+      //定义props的默认值
+      static defaultProps={
+         username : "张三"
+      }
+
+      render(){
+         // 解构
+         const {username,passwd} = this.props
+         
+         return (
+            <>
+             <h4> User Login </h4>
+             <p>username：<input type="text" value={username} readOnly /></p>
+             <p>password：<input type="password" value={passwd} readOnly/></p>
+             <p><button> login </button></p>
+            </>
+         )
+      }
+   }
+   //...loginForm批量传递标签属性
+   const loginForm = { username: 'Dai', passwd: 123456 };
+
+   const reactSpan = (
+      <span>
+         <h3>React Props 类式默认值</h3>
+        {<FromLogin/>}
+        //...loginForm批量传递标签属性
+        {<FromLogin {...loginForm}/>}
+      </span>
+   )
+
+   ReactDOM.render(
+      reactSpan,
+      root
+   )
+</script>
+
+</html>
+```
 

@@ -1,0 +1,81 @@
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   function FormTitle(){
+      return <h4> User Login </h4>
+   }
+
+   function UserName(props) {
+      const userName = (
+         <>
+            <p>username：<input type="text" value={props.username} readOnly /></p>
+            <i>{props.username}</i>
+         </>
+      )
+      return userName
+   }
+
+   UserName.propTypes = {
+      username : PropTypes.string.isRequired, //name必需，且为字符串
+   }
+   // username 不存在情况下，使用该默认值：李四
+   UserName.defaultProps = {
+      username : "李四"
+   }
+   function Password(props){
+      const passwd = (
+         <p>password：<input type="password" value={props.passwd} readOnly/></p>
+      )
+      return passwd
+   }
+
+   Password.propTypes = {
+      passwd : PropTypes.number.isRequired, //number必需，且为数字
+   }
+
+   function Submit(){
+      const submit = (
+         <p><button> login </button></p>
+      )
+      return submit
+   }
+
+
+   function FormLogin() {
+      return (
+         <>
+            <FormTitle/>
+            <UserName username="张三"/>
+            <Password passwd={123456}/>
+            <Submit/>
+         </>
+      )
+   }
+
+
+   const reactSpan = (
+      <span>
+         <h3>React Props应用</h3>
+        {<FormLogin/>}
+      </span>
+   )
+    ReactDOM.render(
+      reactSpan,
+      root
+    )
+</script>
+
+</html>
