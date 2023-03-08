@@ -1022,3 +1022,130 @@ cdn： https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js
 </html>
 ```
 
+## 4.2 React 时钟应用例
+
+函数组件方式，实现一个时钟应用：
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+   
+   function updateTime() {
+      const renderDiv = (
+         <div>
+            <h3>React 渲染机制</h3>
+            <p>{Math.round(Math.random()*10+10)}</p>
+            <p> 现在时间：{new Date().toLocaleTimeString()} </p>
+         </div>
+      )
+
+      ReactDOM.render(
+         renderDiv,
+         root
+       )
+   }
+
+   setInterval(updateTime,1000)
+   
+</script>
+
+</html>
+```
+
+函数组件方式2，实现一个时钟应用：
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="rootSpan"></div>
+   <div id="rootDiv"></div>
+</body>
+
+<script type="text/babel">
+   const rootSpan =  document.getElementById("rootSpan")
+   function UpdateTime() {
+       return(
+         <div>
+            <p>{Math.round(Math.random()*10+10)}</p>
+            <p> 现在时间：{new Date().toLocaleTimeString()} </p>
+         </div>
+       )
+   }
+   const reactSpan = (
+      <span>
+         <h3>React 渲染机制1</h3>
+         <UpdateTime />
+      </span>
+   )
+   
+   ReactDOM.render(reactSpan,rootSpan)
+   
+   // props
+   function UpdateTime2(props) {
+      return(
+        <div>
+           <h3>React 渲染机制2</h3>
+           <p><MathComp /></p>
+           <p> 现在时间：{props.data.toLocaleTimeString()} </p>
+        </div>
+      )
+  }
+
+  function MathComp() {
+   return <i>{Math.round(Math.random()*10+10)}</i>
+  }
+  // 定义之后不刷新
+   const reactDiv = <UpdateTime2 data={new Date()} />
+
+   const rootDiv =  document.getElementById("rootDiv")
+   function autoClock() {
+      console.log("auto clock")
+
+     // ReactDOM.render( reactDiv, rootDiv) // 不刷新时钟
+     ReactDOM.render( <UpdateTime2 data={new Date()} />, rootDiv) // 刷新时钟
+   }
+
+   setInterval(autoClock,1000)
+
+</script>
+
+</html>
+```
+
+## 4.3 React 生命周期
+
+​	React框架为组件设计了一个“生命周期”的概念，用于配合React状态（State）实现组件的渲染操作。
+
+​	React组件中，生命周期可基本分成三个状态，具体如下：
+
+- Mounting   /ˈmaʊntɪŋ/ :已开始挂载真实的组件DOM。
+
+- Updating   /ˌʌpˈdeɪtɪŋ/：正在重新渲染组件DOM。
+- Unmounting ：已卸载真实的组件DOM。
+
+  React框架定义了一组关于生命周期的方法：具体如下：
+
+- componentWillMount()方法：在渲染前调用，可以在客户端，也可在服务端。
+
+- componentDidMount()方法：在第一次渲染后调用，只作用于客户端。
+
+- componentWillUpdate()方法：在组件接收到新的Props参数或者State状态，但还没有渲染时候被调用。另外，该方法在初始化时不会被调用。
+- componentWillUnmount()方法：在组件从DOM中被移除之前会立刻被调用。
+
