@@ -1133,19 +1133,21 @@ cdn： https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js
 
 ​	React框架为组件设计了一个“生命周期”的概念，用于配合React状态（State）实现组件的渲染操作。
 
-​	React组件中，生命周期可基本分成三个状态，具体如下：
+> React组件中，生命周期可基本分成三个状态，具体如下：
+>
+> - Mounting   /ˈmaʊntɪŋ/ :已开始挂载真实的组件DOM。
+>
+> - Updating   /ˌʌpˈdeɪtɪŋ/：正在重新渲染组件DOM。
+> - Unmounting ：已卸载真实的组件DOM。
+>
+>
 
-- Mounting   /ˈmaʊntɪŋ/ :已开始挂载真实的组件DOM。
-
-- Updating   /ˌʌpˈdeɪtɪŋ/：正在重新渲染组件DOM。
-- Unmounting ：已卸载真实的组件DOM。
-
-  React框架定义了一组关于生命周期的方法：具体如下：
-
-- componentWillMount()方法：在渲染前调用，可以在客户端，也可在服务端。
-
-- componentDidMount()方法：在第一次渲染后调用，只作用于客户端。
-
-- componentWillUpdate()方法：在组件接收到新的Props参数或者State状态，但还没有渲染时候被调用。另外，该方法在初始化时不会被调用。
-- componentWillUnmount()方法：在组件从DOM中被移除之前会立刻被调用。
+> React框架定义了一组关于生命周期的方法：具体如下：
+>
+> - componentWillMount()方法：在渲染前调用，可以在客户端，也可在服务端。
+>
+> - componentDidMount()方法：在第一次渲染后调用，只作用于客户端。
+>
+> - componentWillUpdate()方法：在组件接收到新的Props参数或者State状态，但还没有渲染时候被调用。另外，该方法在初始化时不会被调用。
+> - componentWillUnmount()方法：在组件从DOM中被移除之前会立刻被调用。
 
