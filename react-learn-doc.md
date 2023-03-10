@@ -1151,3 +1151,161 @@ cdn： https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js
 > - componentWillUpdate()方法：在组件接收到新的Props参数或者State状态，但还没有渲染时候被调用。另外，该方法在初始化时不会被调用。
 > - componentWillUnmount()方法：在组件从DOM中被移除之前会立刻被调用。
 
+```JavaScript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+   
+   class Clock extends React.Component {
+      constructor(props){
+         super(props)
+         this.state = {
+            date: new Date()
+         }
+      }
+      componentDidMount(){
+         console.log("2 componentDidMount")
+         this.timerId = setInterval(
+            () => this.tick(),
+            1000
+         )
+         console.log("3 componentDidMount")
+      }
+
+      componentWillUnmount(){
+         console.log("1 componentWillUnmount")
+         clearInterval( this.timerId )
+      }
+
+    
+      tick() {
+         console.log("thick()")
+         this.setState({
+            date : new Date()
+         })
+      }
+
+      /*
+      componentWillMount(){
+         console.log("1 componentWillMount")
+      }
+      componentWillUpdate(){
+         console.log("3 componentWillUpdate")
+      }
+      */
+
+      render(){
+         return(
+            <>
+              <p>{this.state.date.toLocaleString()}</p>
+            </>
+         )
+      }
+
+   }
+  
+   ReactDOM.render(<Clock/>, root)
+</script>
+
+</html>
+```
+
+## 4.4 自顶向下的数据流
+
+​	React框架中的组件是被定义为具有状态（State）的。但是，无论是父组件或子组件都不能知道某个组件是有状态换上无状态的。
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+   function FormatDate(props){
+     
+      if ( props?.date ) {
+         return <h3>Now is {props.date.toLocaleString()}</h3>
+      } else {
+         return <p>date is null ::: { new Date().toLocaleTimeString() }</p>
+      }
+   }
+
+   class Clock extends React.Component {
+      static defaultProps = {
+         propsDate : new Date()
+      }
+
+      constructor(props){
+         super(props)
+         this.state = {
+            date: new Date()
+         }
+      }
+      componentDidMount(){
+         console.log("2 componentDidMount")
+         this.timerId = setInterval(
+            () => this.tick(),
+            1000
+         )
+         console.log("3 componentDidMount")
+      }
+
+      componentWillUnmount(){
+         console.log("1 componentWillUnmount")
+        clearInterval( this.timerId )
+      }
+
+      tick() {
+         console.log("thick()")
+         this.setState({
+            date : new Date()
+         })
+      }
+
+      /*
+      componentWillMount(){
+         console.log("1 componentWillMount")
+      }
+      componentWillUpdate(){
+         console.log("3 componentWillUpdate")
+      }
+      */
+
+      render(){
+         return(
+            <span>
+               <FormatDate date={this.state.date} />
+               <FormatDate date={new Date()} />
+				// 固定值
+               <FormatDate date={this.props.propsDate} />
+               <FormatDate />
+            
+            </span>
+         )
+      }
+
+   }
+  
+   ReactDOM.render(<Clock/>, root)
+</script>
+
+</html>
+```
+
