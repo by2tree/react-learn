@@ -1,0 +1,85 @@
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   class BtnClick extends React.Component {
+      constructor(props) {
+         super(props)
+         this.state = {
+            name : " 默认：张三 "
+         }
+         this.click_0 = this.click_0.bind(this)
+      }
+
+      click_0() {
+         this.setState({
+            name: "小明"
+         })
+         console.log(" 小明绑定 click! "+ this.state.name)
+      }
+
+
+      click_1() {
+         this.setState({
+            name: "小明"
+         })
+         console.log(" 小明 click! "+ this.state.name)
+      }
+
+      click_2(e) {
+         this.setState({
+            name: "王五"
+         })
+         console.log(" 王五 click! "+ this.state.name)
+      }
+
+      // 无需绑定
+      click_3(name,e) {
+         this.setState({
+            name: "李四 "
+         })
+         console.log("李四 click， 参数值："+name +" ,"+ this.state.name)
+      }
+
+      render() {
+         return(
+            <>
+            // 绑定函数 ！ 
+             <button onClick={this.click_0}> Click click_0 !</button>
+             <p/>
+             // 无绑定函数，函数中使用this 报错！！
+             <button onClick={this.click_1}> Click click_1 !</button>
+             <p/>
+             // 无绑定函数，函数中使用this  (e)=> 正常
+             // click_1 = （） =>{ }  *实验性*语法
+             <button onClick={(e)=>{ this.click_1() }}> Click click_1 !</button>
+             <p/>
+             <button onClick={(e)=>this.click_2(e)}> Click click_2 !</button>
+             <p/>
+             <button onClick={(e)=>this.click_3(this.state.name,e)}> Click click_3 !</button>
+            </>
+         )
+      }
+   }
+
+   const reactSpan = (
+      <span>
+         <h3>React 类方式事件处理</h3>
+         <BtnClick />
+      </span>
+   )
+ 
+   ReactDOM.render(reactSpan,root)
+</script>
+
+</html>

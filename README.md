@@ -1346,3 +1346,208 @@ graph TD;datas-->L1; L1-->L2;L2-->L3;
 </html>
 ```
 
+# 第5章 React 事件处理
+
+## 5.1 React 事件介绍
+
+在React框架中，React元素的事件处理和JavaScript对Html DOM元素处理的方式类似，但是，二者在语法有不同，如下：
+
+- React事件绑定属性的命名采用驼峰式写法。
+
+- 如果采用JSX语法，则需要传入一个函数作为事件处理，而不是一个字符串。
+
+```javascript
+# HTML DOM Event
+<button onclick="login()"> 登录 </button>
+
+# React Event   // 注意采用JSX方式（{ }）将函数方法包括进去的
+<button onClick={login}> 登录 </button>
+```
+
+另外，在React框架中对于阻止事件默认新闻的方式也是不同的，传统方式可以使用返回“false”来阻止默认行为，但是React框架中则必须显示的使用preventDefault()方法来阻止默认行为。
+
+```javascript
+# HTML DOM Event
+<a  href="#" onclick="alert('超链接');return false"> 链接 </a>
+
+
+# React Event
+function Hyperlink(){
+    function handleClick(e) {
+        e.preventDefault();
+        console.log("超链接")
+    }
+    return(
+      <a href="#" onClick={handleClick}>> 链接 </a>
+    )
+}
+
+```
+
+## 5.1 React单击事件
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   function onBtnClick(){
+      console.log("clicked ok!")
+   }
+
+   const  reactSpan = (
+      <span>
+         <h3> React单击事件 </h3>
+         <button onClick={onBtnClick} > react Click</button>
+      </span>
+   )
+
+   ReactDOM.render(reactSpan,root)
+</script>
+
+</html>
+```
+
+### 5.1.1 React阻止事件默认行为
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   function PreventLink(){
+      function handlerClick(e) {
+         e.preventDefault()
+         console.log(" click! ")
+      }
+      return(
+         <a href="https://reactjs.org"  onClick={handlerClick} > click me</a>
+      )
+   }
+   
+   const reactSpan = (
+      <span>
+         <h3>React阻止事件默认行为</h3>
+         <PreventLink />
+      </span>
+   )
+
+   ReactDOM.render(reactSpan,root)
+
+</script>
+
+</html>
+```
+
+## 5.2 React 类方式事件处理
+
+在Reactk框架中，如果使用ES6 Class语法来定义一个组件的时候，那么事件处理器会成为该类一个方法。
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   class BtnClick extends React.Component {
+      constructor(props) {
+         super(props)
+         this.state = {
+            name : " 默认：张三 "
+         }
+         this.click_0 = this.click_0.bind(this)
+      }
+
+      click_0() {
+         this.setState({
+            name: "小明"
+         })
+         console.log(" 小明绑定 click! "+ this.state.name)
+      }
+
+
+      click_1() {
+         this.setState({
+            name: "小明"
+         })
+         console.log(" 小明 click! "+ this.state.name)
+      }
+
+      click_2(e) {
+         this.setState({
+            name: "王五"
+         })
+         console.log(" 王五 click! "+ this.state.name)
+      }
+
+      // 无需绑定
+      click_3(name,e) {
+         this.setState({
+            name: "李四 "
+         })
+         console.log("李四 click， 参数值："+name +" ,"+ this.state.name)
+      }
+
+      render() {
+         return(
+            <>
+            // 绑定函数 ！ 
+             <button onClick={this.click_0}> Click click_0 !</button>
+             <p/>
+             // 无绑定函数，函数中使用this 报错！！
+             <button onClick={this.click_1}> Click click_1 !</button>
+             <p/>
+             // 无绑定函数，函数中使用this  (e)=> 正常
+             // click_1 = （） =>{ }  *实验性*语法
+             <button onClick={(e)=>{ this.click_1() }}> Click click_1 !</button>
+             <p/>
+             <button onClick={(e)=>this.click_2(e)}> Click click_2 !</button>
+             <p/>
+             <button onClick={(e)=>this.click_3(this.state.name,e)}> Click click_3 !</button>
+            </>
+         )
+      }
+   }
+
+   const reactSpan = (
+      <span>
+         <h3>React 类方式事件处理</h3>
+         <BtnClick />
+      </span>
+   )
+ 
+   ReactDOM.render(reactSpan,root)
+</script>
+
+</html>
+```
+
