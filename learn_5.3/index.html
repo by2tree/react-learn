@@ -1,0 +1,69 @@
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   class ToggleBtnComp extends React.Component {
+      constructor(props) {
+         super(props)
+         this.state = {
+            isToggleOn : true
+         }
+      }
+
+      toggleBtnClick = (isToggleOn , e)=>{
+         e.preventDefault()
+         console.log("Now state is => " + isToggleOn )
+
+         // https://blog.csdn.net/oldwang1999/article/details/120016946
+         // 将 setState() 视为请求而不是立即更新组件的命令。
+         // 为了更好的感知性能，React 会延迟调用它，然后通过一次传递更新多个组件。React 并不会保证 state 的变更会立即生效。
+
+         //this.setState({
+         //   isToggleOn: !this.state.isToggleOn
+         //})
+
+        // this.setState的第一个参数是可以接受一个函数的，在这个函数中第一个参数是state，
+        // 第二个参数是props，其中state一定是最新的。
+        // this.setState(
+        //   state => ({
+        //        isToggleOn: !this.state.isToggleOn
+        //   })
+        // )
+        this.setState(
+            (state) => {
+               return { isToggleOn: !this.state.isToggleOn }
+            }
+         )
+      }
+
+      render(){
+         return(
+            <button onClick={ (e) => this.toggleBtnClick(this.state.isToggleOn,e) } >
+               {this.state.isToggleOn ? " Button ON " : " Button OFF "}
+            </button>
+         )
+      }
+     
+   }
+
+   const reactSpan = (
+      <span>
+         <h3>开关按钮</h3>
+         <ToggleBtnComp />
+      </span>
+   )
+
+   ReactDOM.render(reactSpan,root)
+</script>
+
+</html>
