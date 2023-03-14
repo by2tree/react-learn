@@ -1,0 +1,47 @@
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   class InpuFocusComp extends React.Component {
+      constructor(props) {
+         super(props)
+      }
+
+      inputTextFocus(e) {
+         e.preventDefault()
+         console.log("this input text focus!!")
+         this.setState({
+            inputVal : e.target.value
+         })
+      }
+
+      render() {
+         return (
+            <>
+               <input type="text" onFocus={(e)=>this.inputTextFocus(e)} />
+            </>
+         )
+      }
+   }
+
+   const reactSpan = (
+      <span>
+          <h3>React 文本框事件</h3>
+          <InpuFocusComp />
+      </span>
+   )
+  
+   ReactDOM.render(reactSpan,root)
+</script>
+
+</html>

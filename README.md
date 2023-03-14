@@ -1626,3 +1626,154 @@ function Hyperlink(){
 
 ## 5.4 React 文本框事件
 
+- onFocus 事件
+
+- onBlur 事件
+
+- onChange 事件
+
+```javascript
+<html>
+ <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"  crossorigin ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"   ></script>
+ </head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root =  document.getElementById("root")
+
+   class InpuFocusComp extends React.Component {
+      constructor(props) {
+         super(props)
+      }
+
+      inputTextFocus(e) {
+         e.preventDefault()
+         console.log("this input text focus!!")
+         this.setState({
+            inputVal : e.target.value
+         })
+      }
+
+      render() {
+         return (
+            <>
+               <input type="text" onFocus={(e)=>this.inputTextFocus(e)} />
+            </>
+         )
+      }
+   }
+
+   const reactSpan = (
+      <span>
+          <h3>React 文本框事件</h3>
+          <InpuFocusComp />
+      </span>
+   )
+  
+   ReactDOM.render(reactSpan,root)
+</script>
+
+</html>
+```
+
+## 5.5 实战：水温监控控件
+
+​	实现一个可以监控水温的文本控件，具体就是通过监控文本框中所输入的水温值，自动判断出该水温值的级别（本例中定义了冰水、冷水、温水、热水和沸水这几个级别），具体代码如下：
+
+```javascript
+<html>
+
+<head>
+   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+   const root = document.getElementById("root")
+
+   function WaterLevel(props) {
+      if (props.level <= 0) {
+         return <p> This is ice water.</p>
+      } else if (props.level > 0 && props.level <= 20) {
+         return <p> This is clod water.</p>
+      } else if (props.level > 20 && props.level <= 38) {
+         return <p> This is warm water.</p>
+      } else if (props.level > 38 && props.level <= 100) {
+         return <p> This is hot water.</p>
+      } else if (props.level > 100) {
+         return <p> This is boiling water.</p>
+      } else {
+         return <p> This is .... water.</p>
+      }
+   }
+
+   class WaterComp extends React.Component {
+      constructor(props) {
+         super(props)
+         this.state = {
+            rature: ""
+         }
+      }
+
+      inputTxtFocus = (e) => {
+         e.preventDefault()
+         console.log(" input text focus.")
+         this.setState({
+            rature: e.target.value
+         })
+      }
+
+      inputTxtChange = (e) => {
+         e.preventDefault()
+         console.log(" input text change.")
+         this.setState({
+            rature: e.target.value
+         })
+      }
+
+      inputTxtBlur = (e) => {
+         e.preventDefault()
+         console.log(" input text blur.")
+         this.setState({
+            rature: e.target.value
+         })
+      }
+
+      render() {
+         const rature = this.state.rature
+         return (
+            <fieldset>
+               <legend>Enter rature to test: </legend>
+               <input type="text" value={rature}
+                  onFocus={(e) => this.inputTxtFocus(e)}
+                  onChange={(e) => this.inputTxtChange(e)}
+                  onBlur={(e) => this.inputTxtBlur(e)} />
+               <WaterLevel level={parseFloat(rature)} />
+            </fieldset>
+         )
+      }
+   }
+
+   const reactSpan = (
+      <span>
+         <h3>实战：水温监控控件</h3>
+         <WaterComp />
+      </span>
+   )
+   ReactDOM.render(reactSpan, root)
+</script>
+
+</html>
+```
+
