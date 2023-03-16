@@ -1777,3 +1777,106 @@ function Hyperlink(){
 </html>
 ```
 
+# 第6章 React Key
+
+> Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Test`. See https://fb.me/react-warning-keys for more information.
+>
+
+  相信在react的使用过程中，大家或多或少都会遇到过这样的警告，这个警告是提醒开发者，需要对渲染的组件添加key属性，那么，这个key属性的作用到底是什么呢？
+
+## 6.1 实例一
+
+​	要了解React中key的作用，可以从key的取值入手，key的取值可以分为三种，不定值、索引值、确定且唯一值，在下面的代码中，key的取值是不定值（Math.random()）
+
+key的取值为随机数【 颜色不会变化 】 这个问题涉及react渲染机制和diff算法
+
+**官网中对于diff有如下规则：**
+
+- 当元素类型变化时，会销毁重建
+- 当元素类型不变时，对比属性
+- 当组件元素类型不变时，通过props递归判断子节点
+- 递归对比子节点，当子节点是列表时，通过key和props来判断。若key一致，则进行更新，若key不一致，就销毁重建
+
+```javascript
+<html>
+
+<head>
+   <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+   <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+   <!-- 生产环境中不建议使用 -->
+   <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+
+<body>
+   <div id="root"></div>
+</body>
+
+<script type="text/babel">
+
+  // https://www.jianshu.com/p/9f98d051668f
+  //与 class 组件中的 setState 方法不同，useState 不会自动合并更新对象。
+  //你可以用函数式的 setState 结合展开运算符来达到合并更新对象的效果
+
+  // https://blog.csdn.net/qq_41614928/article/details/103756012
+  // https://www.jb51.net/article/209359.htm  [详解React中key的作用]
+  // https://www.jianshu.com/p/9f98d051668f
+   const root = document.getElementById("root")
+   
+   class ExampleKeyComp extends React.Component {
+      constructor(props) {
+         super(props)
+         this.state = {
+            divSpan: [1,2,3]
+         }
+      }
+
+      handleClick = () => {
+         this.setState({
+            divSpan: [1,2,3,4,5,6]
+         })
+
+         var spanEle = document.getElementsByTagName('span');
+         Array.from(spanEle).map(it => it.style.color = 'red')
+       }
+
+       render() {
+         const divSpanArray = this.state.divSpan
+         return (
+            <div>
+               {
+                  divSpanArray.map(
+                     /* 
+                     // key的取值为随机数   【 -> 颜色不会变化 】
+                     key={Math.random()}   
+                     这个问题涉及react渲染机制和diff算法
+                     官网中对于diff有如下规则：
+                        当元素类型变化时，会销毁重建
+                        当元素类型不变时，对比属性
+                        当组件元素类型不变时，通过props递归判断子节点
+                        递归对比子节点，当子节点是列表时，通过key和props来判断。若key一致，则进行更新，若key不一致，就销毁重建
+                     
+                     // key的取值为索引值  【 -> 颜色变化 】
+                      key={index}    
+                     */
+                     (val,index) => <div key={Math.random()}>  <span>{val}-{index}</span> </div>
+                  )
+               }
+               <button onClick={() => this.handleClick()}>按钮</button>
+            </div>
+         )
+      }
+   }
+   
+   const divSpan = (
+      <div>
+         <h3>6.1 实例一</h3>
+         <ExampleKeyComp />
+      </div>
+   )
+
+   ReactDOM.render(divSpan, root)
+</script>
+
+</html>
+```
+
